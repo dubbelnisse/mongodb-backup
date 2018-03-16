@@ -1,5 +1,5 @@
 # mongodb-backup
-This image runs mongodump to backup data using cronjob to folder `/backup`
+This image runs mongodump to backup data using cronjob to folder `/backup`. In docker this is runnung in Cent-OS with only mongodb-org-tools. So not another mongo instance.
 
 ## Usage:
 
