@@ -4,7 +4,7 @@ MONGODB_HOST=$([[ ! -z $MONGODB_HOST ]] && echo "$MONGODB_HOST" || echo "127.0.0
 MONGODB_PORT=$([[ ! -z $MONGODB_PORT ]] && echo "$MONGODB_PORT" || echo "27017")
 MONGODB_DB=$([[ ! -z $MONGODB_PORT ]] && echo "$MONGODB_DB" || echo "test")
 
-BACKUP_CMD="mongodump --out /backup/"'${BACKUP_NAME}'" --host ${MONGODB_HOST} --port ${MONGODB_PORT} --db ${MONGODB_DB}"
+BACKUP_CMD="mongodump --gzip --archive=/backup/"'${BACKUP_NAME}'" --host ${MONGODB_HOST} --port ${MONGODB_PORT} --db ${MONGODB_DB}"
 
 echo "=> Creating backup script"
 rm -f /backup.sh
@@ -42,4 +42,4 @@ fi
 echo "${CRON_TIME} /backup.sh >> /mongo_backup.log 2>&1" > /crontab.conf
 crontab  /crontab.conf
 echo "=> Running cron job at interval: \"${CRON_TIME}\""
-# systemctl restart crond.service
+systemctl restart crond.service
